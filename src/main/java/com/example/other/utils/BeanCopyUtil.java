@@ -1,7 +1,5 @@
 package com.example.other.utils;
 
-import com.example.other.StringDemo;
-import com.example.other.StringDemo1;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.cglib.beans.BeanMap;
@@ -63,6 +61,7 @@ public class BeanCopyUtil {
         if (src != null) {
             ignoresThreadLocal.set(ignores);
             T copy = copy(src, tar, new IgnoreFieldCovert());
+            ignoresThreadLocal.remove();
             return copy;
         }
         return null;
@@ -81,6 +80,7 @@ public class BeanCopyUtil {
         if (src != null) {
             optionalThreadLocal.set(options);
             T copy = copy(src, tar, new OptionalFieldCovert());
+            ignoresThreadLocal.remove();
             return copy;
         }
         return null;
@@ -293,24 +293,7 @@ public class BeanCopyUtil {
     }
 
     public static void main(String[] args) {
-        StringDemo demo = new StringDemo();
-        demo.setName("123");
-        demo.setTime(new Date());
 
-        List list = new ArrayList();
-        list.add("123");
-        demo.setList(list);
-
-        List list2 = new ArrayList();
-        list2.add(demo);
-        StringDemo1 demo1 = BeanCopyUtil.copyIgnore(demo, StringDemo1.class, "name");
-        System.out.println(demo1.toString());
-
-        StringDemo1 demo2 = BeanCopyUtil.copyOptional(demo, StringDemo1.class, "name");
-        System.out.println(demo2.toString());
-
-        Map demo3 = BeanCopyUtil.copyToMap(demo);
-        System.out.println(demo3.toString());
 
 
     }
