@@ -21,8 +21,8 @@ import java.util.Map;
 @Slf4j
 public class BeanCopyUtil {
 
-    private static ThreadLocal<String[]> ignoresThreadLocal = new ThreadLocal<>();
-    private static ThreadLocal<String[]> optionalThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<String[]> ignoresThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<String[]> optionalThreadLocal = new ThreadLocal<>();
 
     /**
      * 复制源对象属性值
@@ -80,7 +80,7 @@ public class BeanCopyUtil {
         if (src != null) {
             optionalThreadLocal.set(options);
             T copy = copy(src, tar, new OptionalFieldCovert());
-            ignoresThreadLocal.remove();
+            optionalThreadLocal.remove();
             return copy;
         }
         return null;

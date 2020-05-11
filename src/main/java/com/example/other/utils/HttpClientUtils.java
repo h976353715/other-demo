@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author huangqi
  * @Package com.example.other
- * @Description: http请求工具
+ * @Description: http请求工具 基于okhttp 4.0 但大多数框架使用3.x版本
  * @date 2019-07-08 16:12
  */
 public class HttpClientUtils {
